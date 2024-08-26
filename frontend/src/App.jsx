@@ -1,13 +1,12 @@
-import React from "react"
 import {
 	BrowserRouter as Router,
 	Route,
 	Routes,
 	Navigate,
 } from "react-router-dom"
-import Login from "./Components/Login"
-import SignUp from "./Components/SignUp"
-import Discover from "./Components/Discover"
+import Login from "./pages/Login"
+import SignUp from "./pages/SignUp"
+import Discover from "./pages/Discover"
 
 function App() {
 	return (
