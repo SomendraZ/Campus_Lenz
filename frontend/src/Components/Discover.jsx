@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react"
 
 const Discover = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+	return <div>Hello React this is aman</div>
 }
 
 export default Discover
