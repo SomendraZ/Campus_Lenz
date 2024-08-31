@@ -40,67 +40,7 @@ const SignUp = () => {
     }
   }, [collegeName]);
 
-  function submitForm(data) {
-    const emailWithSuffix = `${data.email}@${selectedSuffix}`;
-
-    // Password regex for at least 8 characters, including 1 uppercase, 1 lowercase, 1 number, and 1 special character
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d@#$!%*?&]{8,}$/;
-
-    if (!data.fullName) {
-      setError("fullName", { message: "Full Name is required" });
-      toast.error("Full Name is required");
-      return;
-    }
-
-    if (!data.collageName) {
-      setError("collageName", { message: "College selection is required" });
-      toast.error("College selection is required");
-      return;
-    }
-
-    if (!emailWithSuffix) {
-      setError("email", { message: "Email is required" });
-      toast.error("Email is required");
-      return;
-    }
-
-    if (!otpConfirm) {
-      setError("otp", { message: "OTP is required and must be confirmed" });
-      toast.error("Please confirm your OTP before submitting");
-      return;
-    }
-
-    if (!data.password) {
-      setError("password", { message: "Password is required" });
-      toast.error("Password is required");
-      return;
-    }
-
-    if (!passwordRegex.test(data.password)) {
-      setError("password", {
-        message:
-          "Password must be at least 8 characters long and include 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character",
-      });
-      toast.error(
-        "Password must be at least 8 characters long and include 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
-      );
-      return;
-    }
-
-    if (data.password !== data.confirmPassword) {
-      setError("confirmPassword", { message: "Passwords do not match" });
-      toast.error("Passwords do not match");
-      return;
-    }
-
-    // If all validations pass
-    console.log({
-      ...data,
-      email: emailWithSuffix,
-    });
-    toast.success("Form submitted successfully!");
-  }
+  function submitForm(data) {}
 
   function handleGetOtp() {
     const emailValue = watch("email");
@@ -188,6 +128,9 @@ const SignUp = () => {
                   placeholder="Full Name"
                   {...register("fullName", {
                     required: "Full Name is required",
+                    validate: (value) =>
+                      value.trim().length > 1 || "Please enter your full name.",
+                    onChange: () => clearErrors("fullName"),
                   })}
                 />
               </label>
