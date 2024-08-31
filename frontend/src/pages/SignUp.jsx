@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css";
+import "react-toastify/dist/ReactToastify.css";
 
 const collageList = [
   { name: "Lovely Professional University", suffix: "lpu.in" },
@@ -14,9 +16,17 @@ const collageList = [
 ];
 
 const SignUp = () => {
-  const { register, handleSubmit, watch, setError, clearErrors, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm();
   const [selectedSuffix, setSelectedSuffix] = useState("");
-  const [otpSent, setOtpSent] = useState(false); // To track if OTP has been sent
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpConfirm, setOtpConfirm] = useState(false);
   const collegeName = watch("collageName");
 
   useEffect(() => {
@@ -26,29 +36,42 @@ const SignUp = () => {
     if (selectedCollege) {
       setSelectedSuffix(selectedCollege.suffix);
     } else {
-      setSelectedSuffix(""); // Reset suffix if no valid college is selected
+      setSelectedSuffix("");
     }
   }, [collegeName]);
 
-  function submitForm(data) {
-    if (data.otp && !/^\d{6}$/.test(data.otp)) {
-      setError("otp", { message: "OTP must be a six-digit number" });
+  function submitForm(data) {}
+
+  function handleGetOtp() {
+    const emailValue = watch("email");
+
+    if (!emailValue) {
+      toast.error("Please enter a valid email address");
+      return;
+    } else if (!selectedSuffix) {
+      toast.error("Please select a college");
       return;
     }
 
-    const emailWithSuffix = `${data.email}@${selectedSuffix}`;
-    console.log({ ...data, email: emailWithSuffix });
-    // Handle form submission logic here
+    const emailWithSuffix = `${emailValue}@${selectedSuffix}`;
+    setOtpSent(true);
+    toast.success("OTP sent successfully!");
   }
 
-  function handleGetOtp() {
-    // Mock OTP sending logic
-    console.log("Sending OTP to the email");
-    setOtpSent(true); // Set OTP sent flag to true
+  function handleOtpCheck() {
+    const otpValue = watch("otp");
+
+    if (!/^\d{6}$/.test(otpValue)) {
+      toast.error("OTP must be a six-digit number");
+      return;
+    }
+    setOtpConfirm(true);
+    toast.success("OTP confirmed successfully!");
   }
 
   return (
     <div className="flex justify-center items-center h-[100dvh]">
+      <ToastContainer />
       <div className="grid grid-cols-1 lg:grid-cols-2 bg-[--theme-clr] p-[5vw] lg:p-[1.5vw] rounded-[2.5vw] lg:rounded-[1vw] custom-shadow h-[91vh] w-[95vw] lg:w-[78vw]">
         <div className="hidden lg:block">
           <Swiper
@@ -103,7 +126,12 @@ const SignUp = () => {
                   className="outline-none bg-[--dark-purple] focus:outline focus:outline-[--light-purple] p-[2.5vw] lg:p-[1vw] w-full h-[12vw] lg:h-[3.75vw] rounded-[1.25vw] lg:rounded-[0.5vw] text-[3vw] lg:text-[1vw]"
                   type="text"
                   placeholder="Full Name"
-                  {...register("fullname", { required: "Full Name is required" })}
+                  {...register("fullName", {
+                    required: "Full Name is required",
+                    validate: (value) =>
+                      value.trim().length > 1 || "Please enter your full name.",
+                    onChange: () => clearErrors("fullName"),
+                  })}
                 />
               </label>
 
@@ -113,7 +141,9 @@ const SignUp = () => {
                   list="HeadlineActArtist"
                   className="outline-none bg-[--dark-purple] focus:outline focus:outline-[--light-purple] p-[2.5vw] lg:p-[1vw] w-full h-[12vw] lg:h-[3.75vw] rounded-[1.25vw] lg:rounded-[0.5vw] text-[3vw] lg:text-[1vw]"
                   placeholder="Please select college"
-                  {...register("collageName", { required: "College selection is required" })}
+                  {...register("collageName", {
+                    required: "College selection is required",
+                  })}
                 />
                 <datalist name="HeadlineAct" id="HeadlineActArtist">
                   {collageList.map(({ name }) => (
@@ -126,14 +156,24 @@ const SignUp = () => {
 
               <label className="relative">
                 <input
-                  className="outline-none bg-[--dark-purple] focus:outline focus:outline-[--light-purple] p-[2.5vw] lg:p-[1vw] w-full h-[12vw] lg:h-[3.75vw] rounded-[1.25vw] lg:rounded-[0.5vw] text-[3vw] lg:text-[1vw]"
+                  className="outline-none bg-[--dark-purple] focus:outline focus:outline-[--light-purple] p-[2.5vw] lg:p-[1vw] w-[75%] h-[12vw] lg:h-[3.75vw] rounded-[1.25vw] lg:rounded-[0.5vw] text-[3vw] lg:text-[1vw]"
                   type="text"
                   placeholder="Email"
                   {...register("email", { required: "Email is required" })}
                 />
-                <span className="absolute right-0 top-2/4 -translate-y-2/4 text-[3vw] lg:text-[1vw] text-[--light-purple] bg-white font-semibold py-[3.5vw] px-[5vw] lg:py-[1vw] lg:px-[2vw] rounded-r-lg">
+                <span className="absolute right-[25%] top-2/4 -translate-y-2/4 text-[3vw] lg:text-[1vw] text-[--light-purple] bg-white font-semibold py-[3.5vw] px-[5vw] lg:py-[1.1vw] lg:px-[2vw] rounded-r-lg">
                   @{selectedSuffix}
                 </span>
+                <button
+                  type="button"
+                  onClick={handleGetOtp}
+                  className={`absolute right-0 top-2/4 -translate-y-2/4 text-[3vw] lg:text-[1vw] bg-[--light-purple] text-white font-semibold py-[3.5vw] px-[2vw] lg:py-[1.1vw] lg:px-[1vw] rounded-[1.25vw] lg:rounded-[0.5vw] ${
+                    otpSent ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  disabled={otpSent}
+                >
+                  {otpSent ? "OTP Sent" : "GET OTP"}
+                </button>
               </label>
 
               <div className="relative">
@@ -149,15 +189,19 @@ const SignUp = () => {
                       message: "OTP must be a six-digit number",
                     },
                   })}
-                  disabled={!otpSent} // Enable OTP input only if OTP is sent
+                  disabled={!otpSent} // Disable input until OTP is sent
                 />
                 <button
                   type="button"
-                  onClick={handleGetOtp} // Call the handler to send OTP
-                  className={`absolute right-4 top-2/4 -translate-y-2/4 text-[3vw] lg:text-[1vw] bg-[--light-purple] text-white font-semibold py-[1vw] px-[2vw] lg:py-[0.5vw] lg:px-[1vw] rounded-[0.5vw] ${otpSent ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  disabled={otpSent} // Disable button if OTP is already sent
+                  onClick={handleOtpCheck}
+                  className={`absolute right-2 top-2/4 -translate-y-2/4 text-[3vw] lg:text-[1vw] bg-[--light-purple] text-white font-semibold py-[2vw] px-[3vw] lg:py-[0.5vw] lg:px-[1vw] rounded-[1.25vw] lg:rounded-[0.5vw] ${
+                    otpConfirm || !otpSent
+                      ? "opacity-50 cursor-not-allowed"
+                      : ""
+                  }`}
+                  disabled={otpConfirm || !otpSent} // Disable button until OTP is sent
                 >
-                  {otpSent ? "OTP Sent" : "GET OTP"}
+                  {otpConfirm ? "OTP Confirmed" : "Confirm OTP"}
                 </button>
               </div>
 
@@ -169,10 +213,6 @@ const SignUp = () => {
                     placeholder="Password"
                     {...register("password", {
                       required: "Password is required",
-                      pattern: {
-                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                        message: "Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, one digit, and one special character",
-                      },
                     })}
                   />
                 </label>
@@ -190,7 +230,11 @@ const SignUp = () => {
                 </label>
               </div>
 
-              <button className="bg-[--light-purple] text-white font-semibold w-full h-[10vw] lg:h-[3.75vw] rounded-[1.25vw] lg:rounded-[0.5vw] text-[4vw] lg:text-[1.25vw] mt-[5vw] lg:mt-[1vw]">
+              <button
+                type="submit"
+                className="bg-[--light-purple] text-white font-semibold w-full h-[10vw] lg:h-[3.75vw] rounded-[1.25vw] lg:rounded-[0.5vw] text-[4vw] lg:text-[1.25vw] mt-[0.5vw]"
+                onClick={submitForm}
+              >
                 Sign Up
               </button>
               <div className="flex items-center my-[2vw] lg:my-[0.75vw] w-full">
