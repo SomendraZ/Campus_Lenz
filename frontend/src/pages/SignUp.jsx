@@ -98,7 +98,7 @@ const SignUp = () => {
 	}
 
 	return (
-		<div className="flex justify-center items-center h-[100dvh]">
+		<div className="flex justify-center items-center h-[100dvh] w-[100dvw] bg-[--bg-clr]">
 			<ToastContainer />
 			<div className="grid grid-cols-1 lg:grid-cols-2 bg-[--theme-clr] p-[5vw] lg:p-[1.5vw] rounded-[2.5vw] lg:rounded-[1vw] custom-shadow h-[91vh] w-[95vw] lg:w-[78vw]">
 				<div className="hidden lg:block">

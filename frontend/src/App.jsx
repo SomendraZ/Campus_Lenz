@@ -7,6 +7,8 @@ import {
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import Discover from "./pages/Discover"
+import Events from "./pages/Events"
+import Home from "./pages/Home"
 
 function App() {
 	return (
@@ -17,11 +19,24 @@ function App() {
 						path="*"
 						element={
 							<Navigate
-								to="/login"
+								to="/discover"
 								replace
 							/>
 						}
 					/>
+					<Route
+						to="/"
+						element={<Home />}
+					>
+						<Route
+							index
+							element={<Navigate to="events" />}
+						/>
+						<Route
+							path="events"
+							element={<Events />}
+						/>
+					</Route>
 
 					<Route
 						path="/login"
