@@ -1,38 +1,40 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export default function EventBanner({
-	eventName,
-	eventDate,
-	eventImage,
-	numberOfImage,
-	eventLocation,
-	eventDescription,
+  eventName,
+  eventDate,
+  eventImage,
+  numberOfImage,
+  eventLocation,
+  eventDescription,
 }) {
-	return (
-		<>
-			<Link
-				to="/"
-				className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-50 dark:text-gray-800 relative hover:scale-[1.02] hover:shadow-lg transition-all"
-			>
-				<div>
-					<div className="absolute top-0 right-12 bg-gray-50 py-4 px-2 shadow rounded">
-						{numberOfImage}
-					</div>
-					<img
-						src={eventImage}
-						alt=""
-						className="object-cover w-full mb-4 h-60 rounded sm:h-96 dark:bg-gray-500"
-					/>
-					<h2 className="mb-1 text-xl font-semibold">
-						{eventName} - ({eventDate})
-					</h2>
+  return (
+    <>
+      <Link
+        to="/"
+        className="flex flex-col max-w-lg p-[3vw] lg:p-[1.25vw] overflow-hidden rounded-lg text-gray-800 relative hover:scale-[1.025] shadow-[_4px_4px_rgba(110,_84,_181,_0.2),_8px_8px_rgba(110,_84,_181,_0.1),_12px_12px_rgba(110,_84,_181,_0.05)] transition-all"
+      >
+        <div>
+          <div className="absolute top-2 right-2 bg-white py-[2vw] px-[2vw] lg:py-[1vw] lg:px-[1vw] border-dotted border-2 border-[--light-purple] rounded">
+            {numberOfImage}
+          </div>
+          <img
+            src={eventImage}
+            alt=""
+            className="object-cover w-full mb-[1.5vw] lg:mb-[1vw] rounded"
+          />
+          <h2 className="mb-[1vw] lg:mb-[0.25vw] text-[2.75vw] lg:text-[1.2vw] font-bold">
+            {eventName} - ({eventDate})
+          </h2>
 
-					<p className="text-sm dark:text-gray-600">{eventLocation}</p>
-					<p className="text-sm dark:text-gray-600 max-h-[60px] relative overflow-hidden eventBannerDescription">
-						{eventDescription}
-					</p>
-				</div>
-			</Link>
-		</>
-	)
+          <p className="text-sm text-gray-500 text-[2.5vw] lg:text-[1vw] font-semibold italic mb-[1.5vw] lg:mb-[0.5vw] ">
+            {eventLocation}
+          </p>
+          <p className="text-sm text-gray-600 text-[2.5vw] lg:text-[1vw] relative line-clamp-2 ">
+            {eventDescription}
+          </p>
+        </div>
+      </Link>
+    </>
+  );
 }
