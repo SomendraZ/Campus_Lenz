@@ -1,6 +1,11 @@
+import Navbar from "../components/Navbar"
 
 const Discover = () => {
-	return <div>Hello React this is aman Verma</div>
+	return (
+		<>
+			<section>Hola</section>
+		</>
+	)
 }
 
 export default Discover
