@@ -1,11 +1,11 @@
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 
 const Discover = () => {
-	return (
-		<>
-			<section>Hola</section>
-		</>
-	)
-}
+  return (
+    <>
+      <section>Hola</section>
+    </>
+  );
+};
 
-export default Discover
+export default Discover;
