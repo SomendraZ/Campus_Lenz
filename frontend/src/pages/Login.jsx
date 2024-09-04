@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css"
 
 export default function Login() {
 	return (
-		<div className="flex justify-center items-center h-[100dvh]">
+		<div className="flex justify-center items-center h-[100dvh] w-[100dvw] bg-[--bg-clr]">
 			<div className="grid grid-cols-1 lg:grid-cols-2 bg-[--theme-clr] p-[5vw] lg:p-[1.5vw] rounded-[2.5vw] lg:rounded-[1vw] custom-shadow h-[91vh] w-[95vw] lg:w-[78vw]">
 				<div className="hidden lg:block md:block">
 					<Swiper
@@ -90,7 +90,7 @@ export default function Login() {
 								<div className="flex-grow h-[0.5vw] lg:h-[0.25vw] border-t-[0.75vw] lg:border-t-[0.15vw] border-[--dark-purple]"></div>
 							</div>{" "}
 							<p className="text-center text-[3.5vw] lg:text-[1vw]">
-								Don't have an account?{" "}
+								Don&apos;t have an account?
 								<Link
 									to="/signup"
 									className="text-[--light-purple]"
