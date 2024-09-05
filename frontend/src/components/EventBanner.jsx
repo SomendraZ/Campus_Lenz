@@ -12,27 +12,29 @@ export default function EventBanner({
     <>
       <Link
         to="/"
-        className="flex flex-col max-w-lg p-[3vw] lg:p-[1.25vw] overflow-hidden rounded-lg text-gray-800 relative hover:scale-[1.025] shadow-[_4px_4px_rgba(110,_84,_181,_0.2),_8px_8px_rgba(110,_84,_181,_0.1),_12px_12px_rgba(110,_84,_181,_0.05)] transition-all"
+        className="flex flex-col max-w-lg rounded-lg text-gray-800 relative hover:scale-[1.025] shadow-[_3px_3px_rgba(100,_97,_81,_0.6),_6px_6px_rgba(100,_97,_81,_0.4),_9px_9px_rgba(100,_97,_81,_0.2)] transition-all bg-[#F6E8CE]"
       >
         <div>
-          <div className="absolute top-2 right-2 bg-white py-[2vw] px-[2vw] lg:py-[1vw] lg:px-[1vw] border-dotted border-2 border-[--light-purple] rounded">
+          <div className="absolute top-[45vw] right-[1vw] lg:top-[22vw] lg:right-[0.75vw] bg-[white] w-[5vw] h-[5vw] lg:h-[2.5vw] lg:w-[2.5vw] grid place-items-center border-dotted rounded-full shadow-md text-[1.75vw] lg:text-[1vw] font-medium text-gray-500">
             {numberOfImage}
           </div>
           <img
             src={eventImage}
             alt=""
-            className="object-cover w-full mb-[1.5vw] lg:mb-[1vw] rounded"
+            className="object-cover k-full rounded-t-lg "
           />
-          <h2 className="mb-[1vw] lg:mb-[0.25vw] text-[2.75vw] lg:text-[1.2vw] font-bold">
-            {eventName} - ({eventDate})
-          </h2>
+          <div className="flex flex-col pt-[1.5vw] top-[5vw] lg:pt-[1vw] px-[1.5vw] pb-[1vw] ">
+            <h2 className="mb-[1vw] lg:mb-[0.25vw] text-[2.75vw] lg:text-[1.2vw] font-bold line-clamp-1">
+              {eventName} - ({eventDate})
+            </h2>
 
-          <p className="text-sm text-gray-500 text-[2.5vw] lg:text-[1vw] font-semibold italic mb-[1.5vw] lg:mb-[0.5vw] ">
-            {eventLocation}
-          </p>
-          <p className="text-sm text-gray-600 text-[2.5vw] lg:text-[1vw] relative line-clamp-2 ">
-            {eventDescription}
-          </p>
+            <p className="lg:text-[1vw] text-[2.5vw] text-gray-500 text-[2.5vw] lg:text-[1vw] font-semibold italic mb-[1.5vw] lg:mb-[0.5vw] line-clamp-1">
+              {eventLocation}
+            </p>
+            <p className="lg:text-[1vw] text-[2.5vw] text-gray-600 text-[2.5vw] lg:text-[1vw] relative line-clamp-2 ">
+              {eventDescription}
+            </p>
+          </div>
         </div>
       </Link>
     </>
