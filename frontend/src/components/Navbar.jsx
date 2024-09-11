@@ -27,27 +27,32 @@ export default function Navbar() {
 					</div>
 					<ul
 						tabIndex={0}
-						className="menu menu-sm dropdown-content bg-base-100 lg:text-white rounded-box z-[1] mt-3 w-52 p-2 shadow"
+						className="menu  menu-sm dropdown-content bg-base-100 lg:text-white rounded-box z-[1] mt-3 w-52 p-2 shadow"
 					>
 						<li>
-							<a>Item 1</a>
+							<NavLink to="/events">Events</NavLink>
 						</li>
 
 						<li>
-							<a>Item 3</a>
+							<NavLink to="/dashboard">Profile</NavLink>
 						</li>
 					</ul>
 				</div>
-				<a className=" text-xl text-white font-semibold">CampusLenz</a>
+				<Link
+					to="/"
+					className=" text-xl text-white font-semibold"
+				>
+					CampusLenz
+				</Link>
 			</div>
 			<div className="navbar-center hidden lg:flex">
-				<ul className="menu menu-horizontal lg:text-white px-1">
+				<ul className="menu navbarMenu menu-horizontal lg:text-white px-1">
 					<li>
-						<a>Item 1</a>
+						<NavLink  to="/events">Events</NavLink>
 					</li>
 
 					<li>
-						<a>Item 3</a>
+						<NavLink to="/dashboard">Profile</NavLink>
 					</li>
 				</ul>
 			</div>
