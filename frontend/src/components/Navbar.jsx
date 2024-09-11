@@ -1,42 +1,61 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom"
 
 export default function Navbar() {
-  return (
-    <nav className="flex items-center justify-between custom-container  text-white py-[1vw] ">
-      <NavLink to="/" className="text-[3vw] lg:text-[1.75vw] font-bold">
-        CampusLenz
-      </NavLink>
-      <ul className="headerNavbar flex items-center gap-8 gap-[2vw] text-[2vw] lg:text-[1vw]">
-        <li>
-          <NavLink className="block px-[1vw] py-[0.5vw] relative" to="events">
-            Events
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className="block px-[1vw] py-[0.5vw] relative" to="upload">
-            Upload
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className="block px-[1vw] py-[0.5vw] w-[15vw] lg:w-[8.5vw] relative"
-            to="view-posts"
-          >
-            View my posts
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className="block px-[1vw] py-[0.5vw] relative"
-            to="dashboard"
-          >
-            Dashboard
-          </NavLink>
-        </li>
-      </ul>
-      <button className="text-[2.5vw] lg:text-[1.25vw]">
-        <Link to="/login">Logout</Link>
-      </button>
-    </nav>
-  );
+	return (
+		<div className="navbar custom-container">
+			<div className="navbar-start">
+				<div className="dropdown">
+					<div
+						tabIndex={0}
+						role="button"
+						className="btn btn-ghost lg:hidden"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-5 w-5"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="white"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="2"
+								d="M4 6h16M4 12h8m-8 6h16"
+							/>
+						</svg>
+					</div>
+					<ul
+						tabIndex={0}
+						className="menu menu-sm dropdown-content bg-base-100 lg:text-white rounded-box z-[1] mt-3 w-52 p-2 shadow"
+					>
+						<li>
+							<a>Item 1</a>
+						</li>
+
+						<li>
+							<a>Item 3</a>
+						</li>
+					</ul>
+				</div>
+				<a className=" text-xl text-white font-semibold">CampusLenz</a>
+			</div>
+			<div className="navbar-center hidden lg:flex">
+				<ul className="menu menu-horizontal lg:text-white px-1">
+					<li>
+						<a>Item 1</a>
+					</li>
+
+					<li>
+						<a>Item 3</a>
+					</li>
+				</ul>
+			</div>
+			<div className="navbar-end text-white">
+				<button>
+					<Link to="/login">Logout</Link>
+				</button>
+			</div>
+		</div>
+	)
 }
